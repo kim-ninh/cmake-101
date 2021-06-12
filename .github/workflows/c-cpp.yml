@@ -1,0 +1,49 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  buildHelloWorld:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build helloworld
+      working-directory: ${{ github.workspace }}/helloworld
+      run: |
+        cmake .
+        make
+        result=$(./hello)
+        echo $result
+  
+  buildStudent:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build Student
+      working-directory: ${{ github.workspace }}/student
+      run: |
+        cmake -B./build -S.
+        make --directory=build
+        result=$(./build/testStudent)
+        echo $result
+
+  buildStudentLib:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build student lib
+      working-directory: ${{ github.workspace }}/studentlib_shared
+      run: |
+        cmake -B./build -S.
+        make --directory=build
+    - name: Use student lib
+      working-directory: ${{ github.workspace }}/use_student_lib
+      run: |
+        cmake -B./build -S.
+        make --directory=build
+        result=$(./build/libtest)
+        echo $result
