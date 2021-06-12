@@ -20,4 +20,8 @@ CMakeUserPresets.json
 # External projects
 *-prefix/
 
+helloworld/hello
+student/build
+studentlib_shared/build
+use_student_lib/build
 # End of https://www.toptal.com/developers/gitignore/api/cmake
