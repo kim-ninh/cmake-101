@@ -18,6 +18,7 @@ jobs:
         make
         result=$(./hello)
         echo $result
+        eval "[[ $result == "Hello world!" ]]"
   
   buildStudent:
     runs-on: ubuntu-latest
@@ -30,6 +31,7 @@ jobs:
         make --directory=build
         result=$(./build/testStudent)
         echo $result
+        eval "[[ $result == "A student with name Joe" ]]"
 
   buildStudentLib:
     runs-on: ubuntu-latest
@@ -47,3 +49,4 @@ jobs:
         make --directory=build
         result=$(./build/libtest)
         echo $result
+        eval "[[ $result == "A student with name Joe" ]]"
